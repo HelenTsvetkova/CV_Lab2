@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
         UNSHARPMASK_l
     };
 
-    static int labPart = UNSHARPMASK_l;
+    int labPart = UNSHARPMASK_l;
 
     switch (labPart) {
 
