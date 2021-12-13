@@ -41,8 +41,8 @@ int main(int argc, char *argv[]) {
     enum {
         BOXFILTER,
         GAUSSIAN,
-        UNSHARPMASK_G_BOX,
         LAPLACIAN,
+        UNSHARPMASK_G_BOX,
         UNSHARPMASK_l
     };
 
@@ -80,7 +80,7 @@ int main(int argc, char *argv[]) {
 
         Mat diff(lennaImg.size(), lennaImg.type());
         float diffProcent = absdiff_c(lennaBlur, lennaBlur_, diff);
-        cout << "-- Difference of custon box filter function and blur function drom openCV : " << diffProcent << " %." << endl;
+        cout << "-- Median difference of custon box filter function and blur function from openCV : " << diffProcent << " %." << endl;
         displayResult(diff, "Difference of blurring", 0.3);
         waitKey();
         destroyAllWindows();
@@ -110,7 +110,7 @@ int main(int argc, char *argv[]) {
 
         Mat diff(lennaImg.size(), lennaImg.type());
         float diffProcent = absdiff_c(lennaGauss, lennaGauss_, diff);
-        cout << "-- Difference of custon Gaussian blur function and Gaussian blur function drom openCV : " << diffProcent << " %." << endl;
+        cout << "-- Median difference of custon Gaussian blur function and Gaussian blur function from openCV : " << diffProcent << " %." << endl;
         displayResult(diff, "Difference of blurring", 0.3);
         waitKey();
 
@@ -131,19 +131,19 @@ int main(int argc, char *argv[]) {
 
         Mat lennaUMGauss(lennaImg.size(), lennaImg.type());
         unsharpMaskGaussian(lennaImg, lennaUMGauss, ksize, sigmaX, scale);
-        displayResult(lennaUMGauss, "Uncharp mask with Gaussian blur", 0.3);
+        displayResult(lennaUMGauss, "Unsharp mask with Gaussian blur", 0.3);
         waitKey();
 
         cout << "-- Unsharp mask with Box filter." << endl;
 
         Mat lennaUMBox(lennaImg.size(), lennaImg.type());
         unsharpMaskBox(lennaImg, lennaUMBox, ksize, scale);
-        displayResult(lennaUMGauss, "Uncharp mask with Box filter", 0.3);
+        displayResult(lennaUMGauss, "Unsharp mask with Box filter", 0.3);
         waitKey();
 
         Mat diff(lennaImg.size(), lennaImg.type());
         float diffProcent = absdiff_c(lennaUMGauss, lennaUMBox, diff);
-        cout << "-- Difference of unsharp mask with Gaussian blur and box filter : " << diffProcent << " %." << endl;
+        cout << "-- Median difference of unsharp mask with Gaussian blur and box filter : " << diffProcent << " %." << endl;
 
         diff.convertTo(diff, CV_32F);
         diff = 1 + diff;
